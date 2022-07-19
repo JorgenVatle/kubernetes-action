@@ -10,6 +10,8 @@ inputs:
 outputs:
   result:
     description: "Output of the kubectl command run"
+  error:
+    description: "Errors emitted from the command execution"
 runs:
   using: "docker"
   image: "Dockerfile"
