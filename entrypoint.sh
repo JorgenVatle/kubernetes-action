@@ -9,7 +9,12 @@ status=$?
 result="${result//'%'/'%25'}"
 result="${result//$'\n'/'%0A'}"
 result="${result//$'\r'/'%0D'}"
-echo ::set-output name=result::"$result"
+
+# Emit result as GitHub output
+echo 'result<<EOF' >> $GITHUB_OUTPUT
+echo $result >> $GITHUB_OUTPUT
+echo 'EOF' >> $GITHUB_OUTPUT
+
 echo "$result"
 
 if [[ $status -eq 0 ]]; then exit 0; else exit 1; fi
