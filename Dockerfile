@@ -15,4 +15,4 @@ COPY entrypoint.sh .
 RUN chmod +x /usr/bin/kubectl
 RUN chmod +x ./entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/root/entrypoint.sh"]
