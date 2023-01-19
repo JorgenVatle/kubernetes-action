@@ -11,7 +11,8 @@ RUN install -o root -g root -m 0755 kubectl /usr/bin/kubectl
 
 COPY entrypoint.sh .
 COPY .assets .
+
 RUN chmod +x /usr/bin/kubectl
-RUN chmod +x /entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
