@@ -25,6 +25,6 @@ echo "$result"
 if [[ $exitCode -eq 0 ]]; then
   exit 0;
 else
-  cat .assets/error-summary-template.md | envsubst >> $GITHUB_STEP_SUMMARY
+  cat /root/.assets/error-summary-template.md | envsubst >> $GITHUB_STEP_SUMMARY
   exit 1;
 fi
