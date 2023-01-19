@@ -1,9 +1,9 @@
-### ⚠️ Kubernetes Action failed!
+# ⚠️ Kubernetes Action failed!
 
 ##### Command
-> ```bash
-> $COMMAND
-> ```
+```bash
+$COMMAND
+```
 
 ##### Result from kubectl
 ```log
