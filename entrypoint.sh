@@ -1,12 +1,13 @@
 #!/bin/sh -l
 
 echo ${KUBE_CONFIG_DATA} | base64 -d > kubeconfig
+
 export KUBECONFIG=kubeconfig
+export COMMAND="kubectl $*"
+export RESULT
 
-export COMMAND="kubectl $1"
-export RESULT="$($COMMAND 2>&1)"
-
-status=$?
+RESULT="$(sh -c "$COMMAND" 2>&1)"
+exitCode=$?
 
 result="$RESULT"
 result="${result//'%'/'%25'}"
@@ -21,7 +22,7 @@ echo "$EOF" >> $GITHUB_OUTPUT
 
 echo "$result"
 
-if [[ $status -eq 0 ]]; then
+if [[ $exitCode -eq 0 ]]; then
   exit 0;
 else
   cat ./.assets/error-summary-template.md | envsubst >> $GITHUB_STEP_SUMMARY
