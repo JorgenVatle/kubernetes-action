@@ -3,9 +3,12 @@
 echo ${KUBE_CONFIG_DATA} | base64 -d > kubeconfig
 export KUBECONFIG=kubeconfig
 
-result="$(kubectl $1 2>&1)"
+export COMMAND="kubectl $1"
+export RESULT="$($COMMAND 2>&1)"
+
 status=$?
 
+result="$result"
 result="${result//'%'/'%25'}"
 result="${result//$'\n'/'%0A'}"
 result="${result//$'\r'/'%0D'}"
@@ -20,6 +23,7 @@ echo "$result"
 
 if [[ $status -eq 0 ]]; then
   exit 0;
-else 
+else
+  cat ./.assets/error-summary-template.md | envsubst >> $GITHUB_STEP_SUMMARY
   exit 1;
 fi
