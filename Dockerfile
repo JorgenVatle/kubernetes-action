@@ -2,7 +2,7 @@ FROM alpine:3.11
 
 WORKDIR /root
 
-ARG KUBECTL_VERSION
+ARG KUBECTL_VERSION="v1.28.2"
 
 RUN apk add py-pip curl
 RUN apk add gettext
