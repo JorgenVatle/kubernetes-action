@@ -5,15 +5,22 @@ branding:
   color: 'blue'
 inputs:
   args:
-    description: "Arguments of kubectl"
+    description: "Arguments to pass to kubectl"
     required: true
+  kubectl_version:
+    required: false
+    description: 'Kubectl version to use. E.g. "v1.28.3"'
 outputs:
   result:
     description: "Output of the kubectl command run"
   error:
     description: "Errors emitted from the command execution"
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.args }}
+  using: "composite"
+  steps:
+    - id: build
+      run: docker build . --build-args="KUBECTL_VERSION=${{inputs.kubectl_version}}" -t kubectl
+      shell: bash
+    - id: run
+      shell: bash
+      run: --rm -v $(pwd):/github/workspace --workdir /github/workspace kubectl ${{ inputs.args }}
