@@ -13,8 +13,10 @@ inputs:
 outputs:
   result:
     description: "Output of the kubectl command run"
+    value: ${{ steps.run.outputs.result }}
   error:
     description: "Errors emitted from the command execution"
+    value: ${{ steps.run.outputs.error }}
 runs:
   using: "composite"
   steps:
