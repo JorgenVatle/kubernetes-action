@@ -1,28 +1,19 @@
 name: "Kubernetes Action"
 description: "Interacts with kubernetes clusters calling kubectl commands. Integrates support for AWS EKS."
 branding:
-  icon: 'anchor'  
+  icon: 'anchor'
   color: 'blue'
 inputs:
   args:
     description: "Arguments to pass to kubectl"
     required: true
-  kubectl_version:
-    required: false
-    description: 'Kubectl version to use. E.g. "v1.28.3"'
 outputs:
   result:
     description: "Output of the kubectl command run"
-    value: ${{ steps.run.outputs.result }}
   error:
     description: "Errors emitted from the command execution"
-    value: ${{ steps.run.outputs.error }}
 runs:
-  using: "composite"
-  steps:
-    - id: build
-      run: docker build . --build-arg="KUBECTL_VERSION=${{inputs.kubectl_version}}" -t kubectl
-      shell: bash
-    - id: run
-      shell: bash
-      run: --rm -v $(pwd):/github/workspace --workdir /github/workspace kubectl ${{ inputs.args }}
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.args }}
