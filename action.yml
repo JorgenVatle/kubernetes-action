@@ -21,7 +21,7 @@ runs:
   using: "composite"
   steps:
     - id: build
-      run: docker build . --build-args="KUBECTL_VERSION=${{inputs.kubectl_version}}" -t kubectl
+      run: docker build . --build-arg="KUBECTL_VERSION=${{inputs.kubectl_version}}" -t kubectl
       shell: bash
     - id: run
       shell: bash
