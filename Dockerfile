@@ -2,11 +2,14 @@ FROM alpine:3.11
 
 WORKDIR /root
 
-ARG KUBECTL_VERSION="1.15.10"
+ARG KUBECTL_VERSION
 
 RUN apk add py-pip curl
 RUN apk add gettext
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+RUN export RELEASE=${KUBECTL_VERSION="$(curl -L -s https://dl.k8s.io/release/stable.txt)"} \
+      && echo "Installing Kubectl ${RELEASE}" \
+      && curl -LO --verbose "https://dl.k8s.io/release/$RELEASE/bin/linux/amd64/kubectl"
 RUN install -o root -g root -m 0755 kubectl /usr/bin/kubectl
 
 COPY .assets .assets
