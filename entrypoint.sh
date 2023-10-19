@@ -7,7 +7,7 @@ export COMMAND="kubectl $*"
 export RESULT
 export KUBECTL_VERSION
 
-KUBECTL_VERSION=$(kubectl --version)
+KUBECTL_VERSION=$(kubectl version)
 RESULT="$(sh -c "$COMMAND" 2>&1)"
 exitCode=$?
 
