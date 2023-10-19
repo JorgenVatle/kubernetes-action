@@ -1,4 +1,5 @@
 ## ⚠️ Kubernetes Action failed!
+kubectl version: `$KUBECTL_VERSION`
 
 ##### Command
 ```bash
