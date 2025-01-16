@@ -7,6 +7,9 @@ export COMMAND="kubectl $*"
 export RESULT
 export KUBECTL_VERSION
 
+# Print command being executed
+printf "> \x1b[2m$COMMAND\x1b[22m"
+
 KUBECTL_VERSION=$(kubectl version)
 RESULT="$(sh -c "$COMMAND" 2>&1)"
 exitCode=$?
@@ -24,7 +27,6 @@ echo "" >> $GITHUB_OUTPUT
 echo $result >> $GITHUB_OUTPUT
 echo "$EOF" >> $GITHUB_OUTPUT
 
-printf "> \x1b[2m$COMMAND\x1b[22m"
 echo "$result"
 
 if [[ $exitCode -eq 0 ]]; then
