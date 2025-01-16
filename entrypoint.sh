@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/sh -l
 
 echo ${KUBE_CONFIG_DATA} | base64 -d > kubeconfig
 
