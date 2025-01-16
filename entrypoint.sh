@@ -8,7 +8,8 @@ export RESULT
 export KUBECTL_VERSION
 
 # Print command being executed
-printf "> \x1b[2m$COMMAND\x1b[22m"
+printf '> \x1b[2m%s\x1b[22m
+' "$COMMAND"
 
 KUBECTL_VERSION=$(kubectl version)
 RESULT="$(sh -c "$COMMAND" 2>&1)"
