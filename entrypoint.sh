@@ -24,6 +24,7 @@ echo "" >> $GITHUB_OUTPUT
 echo $result >> $GITHUB_OUTPUT
 echo "$EOF" >> $GITHUB_OUTPUT
 
+printf "> \x1b[2m$COMMAND\x1b[22m"
 echo "$result"
 
 if [[ $exitCode -eq 0 ]]; then
